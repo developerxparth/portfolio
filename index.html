@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Parth Jha — Developer & Designer</title>
+  <meta name="description" content="Parth Jha portfolio — developer, designer, and AI explorer based in New Delhi." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#02030a;
+      --bg2:#050816;
+      --bg3:#0a1024;
+      --panel:rgba(12,16,32,.72);
+      --panel-2:rgba(9,12,24,.84);
+      --line:rgba(107,140,255,.14);
+      --line-2:rgba(255,53,93,.18);
+      --text:#f3f6ff;
+      --muted:#a7b1d6;
+      --faint:#6d7698;
+      --red:#ff355d;
+      --red-2:#b60031;
+      --blue:#6b8cff;
+      --blue-2:#3f5bff;
+      --violet:#8b5cf6;
+      --green:#22c55e;
+      --shadow:0 18px 60px rgba(0,0,0,.42);
+      --shadow-2:0 30px 100px rgba(0,0,0,.55);
+      --radius-sm:10px;
+      --radius:18px;
+      --radius-lg:28px;
+      --display:"Space Grotesk", sans-serif;
+      --body:"Inter", sans-serif;
+      --mono:"JetBrains Mono", monospace;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:var(--body);
+      color:var(--text);
+      background:
+        radial-gradient(circle at 15% 18%, rgba(107,140,255,.18), transparent 25%),
+        radial-gradient(circle at 82% 14%, rgba(255,53,93,.12), transparent 22%),
+        radial-gradient(circle at 50% 85%, rgba(139,92,246,.10), transparent 28%),
+        linear-gradient(180deg, #02030a 0%, #050816 40%, #02030a 100%);
+      overflow-x:hidden;
+      -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
+    }
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      z-index:0;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23noise)'/%3E%3C/svg%3E");
+      opacity:.04;
+      mix-blend-mode:screen;
+    }
+
+    body::after{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      z-index:0;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(107,140,255,.06), transparent 48%),
+        radial-gradient(circle at 100% 100%, rgba(255,53,93,.05), transparent 40%);
+    }
+
+    ::selection{background:var(--red); color:white}
+    a{color:inherit; text-decoration:none}
+    button,input,textarea{font:inherit}
+    img{max-width:100%; display:block}
+
+    main, nav, footer{position:relative; z-index:2}
+
+    .wrap{
+      width:min(1200px, calc(100% - 40px));
+      margin:0 auto;
+    }
+
+    .reveal{
+      opacity:0;
+      transform:translateY(22px);
+      transition:opacity .7s ease, transform .7s ease;
+    }
+    .reveal.in-view{
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    .section{
+      padding:100px 0;
+      border-top:1px solid rgba(107,140,255,.10);
+      position:relative;
+    }
+
+    .eyebrow{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      font-family:var(--mono);
+      font-size:11px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color:var(--red);
+      margin-bottom:16px;
+    }
+    .eyebrow .line{
+      height:1px;
+      flex:1;
+      max-width:84px;
+      background:linear-gradient(90deg, rgba(255,53,93,.8), transparent);
+    }
+
+    .title{
+      font-family:var(--display);
+      font-weight:700;
+      font-size:clamp(34px, 4.5vw, 58px);
+      line-height:1.02;
+      letter-spacing:-.03em;
+      margin:0 0 12px;
+    }
+
+    .sub{
+      max-width:640px;
+      color:var(--muted);
+      font-size:16px;
+      line-height:1.8;
+      margin:0 0 54px;
+    }
+
+    nav{
+      position:fixed;
+      top:0; left:0; right:0;
+      z-index:100;
+      height:76px;
+      display:flex;
+      align-items:center;
+      background:rgba(2,3,10,.72);
+      border-bottom:1px solid rgba(107,140,255,.12);
+      backdrop-filter:blur(18px) saturate(1.2);
+      -webkit-backdrop-filter:blur(18px) saturate(1.2);
+      transition:box-shadow .25s ease, background .25s ease;
+    }
+    nav.scrolled{
+      box-shadow:0 10px 45px rgba(0,0,0,.35);
+      background:rgba(2,3,10,.84);
+    }
+
+    .nav-inner{
+      width:min(1240px, calc(100% - 40px));
+      margin:0 auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      font-family:var(--mono);
+      font-size:13px;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      color:var(--text);
+      white-space:nowrap;
+    }
+
+    .nav-links{
+      display:flex;
+      align-items:center;
+      gap:30px;
+      list-style:none;
+      margin:0;
+      padding:0;
+    }
+    .nav-links a{
+      color:var(--muted);
+      font-family:var(--mono);
+      font-size:12px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      position:relative;
+      transition:color .2s ease;
+    }
+    .nav-links a:hover{color:var(--text)}
+
+    .hero{
+      min-height:100vh;
+      padding-top:76px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .orb{
+      position:absolute;
+      border-radius:50%;
+      filter:blur(110px);
+      pointer-events:none;
+      opacity:.9;
+      animation:float 9s ease-in-out infinite;
+    }
+    .orb.one{
+      width:560px; height:560px;
+      right:-140px; top:-120px;
+      background:radial-gradient(circle, rgba(255,53,93,.16) 0%, transparent 68%);
+    }
+    .orb.two{
+      width:500px; height:500px;
+      left:-120px; bottom:-120px;
+      background:radial-gradient(circle, rgba(107,140,255,.18) 0%, transparent 68%);
+      animation-delay:-3s;
+    }
+
+    @keyframes float{
+      0%,100%{transform:translateY(0) scale(1)}
+      50%{transform:translateY(-24px) scale(1.05)}
+    }
+
+    .hero-inner{
+      width:min(1240px, calc(100% - 40px));
+      margin:0 auto;
+      min-height:calc(100vh - 76px);
+      display:grid;
+      grid-template-columns:1.15fr .85fr;
+      gap:60px;
+      align-items:center;
+      position:relative;
+    }
+
+    .status-pill{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:8px 14px;
+      border-radius:999px;
+      border:1px solid rgba(255,53,93,.28);
+      background:rgba(255,53,93,.06);
+      color:var(--red);
+      font-family:var(--mono);
+      font-size:11px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      margin-bottom:26px;
+      width:fit-content;
+    }
+    .status-dot{
+      width:8px;
+      height:8px;
+      border-radius:50%;
+      background:var(--red);
+      box-shadow:0 0 0 0 rgba(255,53,93,.35);
+      animation:ping 1.5s ease-in-out infinite;
+    }
+    @keyframes ping{
+      0%,100%{box-shadow:0 0 0 0 rgba(255,53,93,.35)}
+      50%{box-shadow:0 0 0 8px rgba(255,53,93,0)}
+    }
+
+    .hero-name{
+      font-family:var(--display);
+      font-size:clamp(54px, 7vw, 98px);
+      line-height:.95;
+      letter-spacing:-.05em;
+      margin:0 0 12px;
+    }
+    .hero-name .first{
+      display:block;
+      color:var(--text);
+    }
+    .hero-name .last{
+      display:block;
+      position:relative;
+      background:linear-gradient(135deg, var(--red) 0%, #ff6b8a 35%, var(--blue) 100%);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      background-clip:text;
+    }
+
+    .hero-role{
+      color:var(--blue);
+      font-family:var(--mono);
+      font-size:15px;
+      min-height:24px;
+      margin:10px 0 18px;
+    }
+    .cursor{
+      display:inline-block;
+      width:2px;
+      height:1em;
+      background:var(--blue);
+      margin-left:2px;
+      vertical-align:middle;
+      animation:blink 1s step-end infinite;
+    }
+    @keyframes blink{50%{opacity:0}}
+
+    .hero-desc{
+      max-width:560px;
+      color:var(--muted);
+      font-size:17px;
+      line-height:1.8;
+      margin:0 0 34px;
+    }
+
+    .hero-btns{
+      display:flex;
+      flex-wrap:wrap;
+      gap:14px;
+      margin-bottom:44px;
+    }
+
+    .btn-primary,
+    .btn-ghost{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding:14px 24px;
+      border-radius:14px;
+      font-family:var(--mono);
+      font-size:13px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      transition:transform .2s ease, box-shadow .2s ease;
+    }
+    .btn-primary{
+      border:none;
+      color:white;
+      background:linear-gradient(135deg, var(--red), #ff5d79 45%, var(--blue) 120%);
+      box-shadow:0 16px 40px rgba(255,53,93,.24);
+    }
+    .btn-primary:hover{
+      transform:translateY(-2px);
+      box-shadow:0 22px 55px rgba(255,53,93,.30);
+    }
+
+    .btn-ghost{
+      border:1px solid rgba(107,140,255,.18);
+      color:var(--text);
+      background:rgba(255,255,255,.02);
+    }
+    .btn-ghost:hover{
+      transform:translateY(-2px);
+      border-color:rgba(107,140,255,.36);
+      background:rgba(107,140,255,.06);
+    }
+
+    .hero-stats{
+      display:flex;
+      flex-wrap:wrap;
+      gap:28px;
+    }
+    .hero-stat .n{
+      display:block;
+      font-family:var(--display);
+      font-size:28px;
+      font-weight:700;
+      line-height:1.1;
+      color:var(--text);
+    }
+    .hero-stat .l{
+      display:block;
+      margin-top:4px;
+      font-family:var(--mono);
+      font-size:11px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:var(--faint);
+    }
+
+    .hero-visual{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+    }
+
+    .id-card{
+      width:min(360px, 100%);
+      min-height:470px;
+      border-radius:28px;
+      padding:28px;
+      position:relative;
+      overflow:hidden;
+      border:1px solid rgba(107,140,255,.20);
+      background:linear-gradient(160deg, rgba(16,22,48,.92), rgba(8,10,20,.94));
+      box-shadow:var(--shadow-2);
+    }
+
+    .avatar{
+      width:84px;
+      height:84px;
+      display:grid;
+      place-items:center;
+      border-radius:22px;
+      margin-bottom:18px;
+      font-family:var(--display);
+      font-size:28px;
+      font-weight:700;
+      color:white;
+      background:linear-gradient(135deg, rgba(107,140,255,.9), rgba(255,53,93,.75));
+    }
+
+    .id-name{
+      font-family:var(--display);
+      font-size:24px;
+      font-weight:700;
+      margin-bottom:4px;
+      letter-spacing:-.02em;
+    }
+    .id-role{
+      color:var(--blue);
+      font-family:var(--mono);
+      font-size:11px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      margin-bottom:22px;
+    }
+
+    .section-content{
+      max-width:1000px;
+    }
+
+    @media (max-width:768px){
+      .hero-inner{
+        grid-template-columns:1fr;
+        gap:40px;
+        padding:40px 24px;
+      }
+      .nav-links{display:none}
+      .wrap{width:min(100%, calc(100% - 24px))}
+      .section{padding:60px 0}
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="nav-inner">
+      <div class="brand">PJ</div>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="orb one"></div>
+      <div class="orb two"></div>
+      <div class="hero-inner">
+        <div>
+          <div class="status-pill">
+            <span class="status-dot"></span>
+            Available for work
+          </div>
+          <h1 class="hero-name">
+            <span class="first">Parth</span>
+            <span class="last" data-text="Jha">Jha</span>
+          </h1>
+          <p class="hero-role">Developer & Designer<span class="cursor"></span></p>
+          <p class="hero-desc">
+            Full-stack developer and UI/UX designer creating beautiful, functional digital experiences. Based in New Delhi.
+          </p>
+          <div class="hero-btns">
+            <button class="btn-primary">View My Work</button>
+            <button class="btn-ghost">Get In Touch</button>
+          </div>
+          <div class="hero-stats">
+            <div class="hero-stat">
+              <span class="n">50+</span>
+              <span class="l">Projects</span>
+            </div>
+            <div class="hero-stat">
+              <span class="n">5+</span>
+              <span class="l">Years</span>
+            </div>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="id-card">
+            <div class="avatar">PJ</div>
+            <h2 class="id-name">Parth Jha</h2>
+            <p class="id-role">Full Stack Dev</p>
+            <p style="font-size:13px; color:var(--muted); margin:0">Building elegant solutions for complex problems</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section" id="about">
+      <div class="wrap">
+        <div class="eyebrow">
+          <span class="line"></span>
+          <span>About</span>
+        </div>
+        <h2 class="title">Who I Am</h2>
+        <p class="sub">Full-stack developer passionate about creating intuitive user experiences and scalable solutions</p>
+        <div class="section-content">
+          <p style="color:var(--muted); line-height:1.9; margin-bottom:20px;">
+            I'm a developer based in New Delhi with a passion for building beautiful, functional web applications. With expertise in modern web technologies, I create solutions that users love and developers appreciate.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Work Section -->
+    <section class="section" id="work">
+      <div class="wrap">
+        <div class="eyebrow">
+          <span class="line"></span>
+          <span>Work</span>
+        </div>
+        <h2 class="title">Featured Projects</h2>
+        <p class="sub">A selection of my recent work showcasing my abilities in design and development</p>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section" id="contact">
+      <div class="wrap">
+        <div class="eyebrow">
+          <span class="line"></span>
+          <span>Contact</span>
+        </div>
+        <h2 class="title">Get In Touch</h2>
+        <p class="sub">Have a project in mind? Let's talk about it.</p>
+        <p style="color:var(--muted); font-size:16px;">
+          Email: <a href="mailto:hello@parth.dev" style="color:var(--red)">hello@parth.dev</a>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer style="padding:40px 0; border-top:1px solid rgba(107,140,255,.10); text-align:center; color:var(--faint);">
+    <p style="margin:0; font-size:14px;">© 2024 Parth Jha. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Scroll animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Nav scroll effect
+    window.addEventListener('scroll', () => {
+      document.querySelector('nav').classList.toggle('scrolled', window.scrollY > 0);
+    });
+
+    // Smooth scroll for nav links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
